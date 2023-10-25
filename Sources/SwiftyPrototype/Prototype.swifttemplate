@@ -976,7 +976,7 @@ class MethodWrapper {
         return """
         let willReturn: [\(returnTypeString)] = []
         \t\t\tlet given: \(prefix)Given = { \(givenConstructor(prefix: prefix)) }()
-        \t\t\tlet stubber = given.stub(for: (\(returnTypeString)).self)
+        \t\t\t\(stubThrows(returnTypeString: returnTypeString))
         \t\t\twillProduce(stubber)
         \t\t\treturn given
         """
@@ -987,10 +987,25 @@ class MethodWrapper {
         return """
         let willThrow: [Error] = []
         \t\t\tlet given: \(prefix)Given = { \(givenConstructorThrows(prefix: prefix)) }()
-        \t\t\tlet stubber = given.stubThrows(for: (\(returnTypeString)).self)
+        \t\t\t\(stubThrows(returnTypeString: returnTypeString))
         \t\t\twillProduce(stubber)
         \t\t\treturn given
         """
+    }
+
+    func stubThrows(returnTypeString: String) -> String {
+        var name: String
+        if isGeneric() || returnTypeString.contains("<") {
+            name = returnTypeString
+        } else {
+            name = "(\(returnTypeString))"
+        }
+        name = name.trimmingCharacters(in: CharacterSet(charactersIn: " "))
+        return "let stubber = given.stub(for: \(name).self)"
+    }
+
+    func stubThrows(returnTypeString: String) -> String {
+        return "let stubber = given.stubThrows(for: (\(returnTypeString)).self)"
     }
 
     // Verify

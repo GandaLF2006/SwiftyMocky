@@ -941,14 +941,14 @@ open class AVeryGenericProtocolMock: AVeryGenericProtocol, Mock, StaticMock {
         public static func generic<Q>(lhs: Parameter<Q>, rhs: Parameter<Q>, willProduce: (Stubber<Bool>) -> Void) -> StaticMethodStub where Q: Equatable {
             let willReturn: [Bool] = []
 			let given: StaticGiven = { return StaticGiven(method: .sm_generic__lhs_lhsrhs_rhs(`lhs`.wrapAsGeneric(), `rhs`.wrapAsGeneric()), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
-			let stubber = given.stub(for: (Bool).self)
+			let stubber = given.stub(for: Bool.self)
 			willProduce(stubber)
 			return given
         }
         public static func veryConstrained<Q: Sequence>(lhs: Parameter<Q>, rhs: Parameter<Q>, willProduce: (Stubber<Bool>) -> Void) -> StaticMethodStub where Q: Equatable {
             let willReturn: [Bool] = []
 			let given: StaticGiven = { return StaticGiven(method: .sm_veryConstrained__lhs_lhsrhs_rhs(`lhs`.wrapAsGeneric(), `rhs`.wrapAsGeneric()), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
-			let stubber = given.stub(for: (Bool).self)
+			let stubber = given.stub(for: Bool.self)
 			willProduce(stubber)
 			return given
         }
@@ -1013,7 +1013,7 @@ open class AVeryGenericProtocolMock: AVeryGenericProtocol, Mock, StaticMock {
         public static func methodConstrained<A,B,C>(param: Parameter<A>, willProduce: (Stubber<(B,C)>) -> Void) -> MethodStub {
             let willReturn: [(B,C)] = []
 			let given: Given = { return Given(method: .m_methodConstrained__param_param(`param`.wrapAsGeneric()), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
-			let stubber = given.stub(for: ((B,C)).self)
+			let stubber = given.stub(for: (B,C).self)
 			willProduce(stubber)
 			return given
         }
@@ -1944,7 +1944,7 @@ open class AnotherProtocolMock: AnotherProtocol, Mock {
         public static func doSomething<T: ProtocolWithAssociatedType2>(type: Parameter<T>, willProduce: (Stubber<T.ValueType?>) -> Void) -> MethodStub {
             let willReturn: [T.ValueType?] = []
 			let given: Given = { return Given(method: .m_doSomething__type_type(`type`.wrapAsGeneric()), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
-			let stubber = given.stub(for: (T.ValueType?).self)
+			let stubber = given.stub(for: T.ValueType?.self)
 			willProduce(stubber)
 			return given
         }
@@ -2776,7 +2776,7 @@ open class EdgeCasesGenericsProtocolMock: EdgeCasesGenericsProtocol, Mock {
         public static func getter<K,V: Sequence,T: Equatable>(swapped key: Parameter<Mytest<K,V>>, willProduce: (Stubber<T>) -> Void) -> MethodStub {
             let willReturn: [T] = []
 			let given: Given = { return Given(method: .m_getter__swapped_key(`key`.wrapAsGeneric()), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
-			let stubber = given.stub(for: (T).self)
+			let stubber = given.stub(for: T.self)
 			willProduce(stubber)
 			return given
         }
@@ -3711,7 +3711,7 @@ public final class FailsWithReturnedTypeBeingGenericOfSelfMock: FailsWithReturne
         public static func methodWillReturnSelfTypedArray(willProduce: (Stubber<Array<FailsWithReturnedTypeBeingGenericOfSelfMock> >) -> Void) -> MethodStub {
             let willReturn: [Array<FailsWithReturnedTypeBeingGenericOfSelfMock> ] = []
 			let given: Given = { return Given(method: .m_methodWillReturnSelfTypedArray, products: willReturn.map({ StubProduct.return($0 as Any) })) }()
-			let stubber = given.stub(for: (Array<FailsWithReturnedTypeBeingGenericOfSelfMock> ).self)
+			let stubber = given.stub(for: Array<FailsWithReturnedTypeBeingGenericOfSelfMock>.self)
 			willProduce(stubber)
 			return given
         }
@@ -3725,7 +3725,7 @@ public final class FailsWithReturnedTypeBeingGenericOfSelfMock: FailsWithReturne
         public static func methodWillReturnSelfTypedCustom(willProduce: (Stubber<CustomGeneric<FailsWithReturnedTypeBeingGenericOfSelfMock> >) -> Void) -> MethodStub {
             let willReturn: [CustomGeneric<FailsWithReturnedTypeBeingGenericOfSelfMock> ] = []
 			let given: Given = { return Given(method: .m_methodWillReturnSelfTypedCustom, products: willReturn.map({ StubProduct.return($0 as Any) })) }()
-			let stubber = given.stub(for: (CustomGeneric<FailsWithReturnedTypeBeingGenericOfSelfMock> ).self)
+			let stubber = given.stub(for: CustomGeneric<FailsWithReturnedTypeBeingGenericOfSelfMock>.self)
 			willProduce(stubber)
 			return given
         }
@@ -4315,7 +4315,7 @@ open class GenericProtocolReturningIntMock: GenericProtocolReturningInt, Mock {
         public static func value<T>(for value: Parameter<T>, willProduce: (Stubber<Int>) -> Void) -> MethodStub {
             let willReturn: [Int] = []
 			let given: Given = { return Given(method: .m_value__for_value(`value`.wrapAsGeneric()), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
-			let stubber = given.stub(for: (Int).self)
+			let stubber = given.stub(for: Int.self)
 			willProduce(stubber)
 			return given
         }
@@ -4534,14 +4534,14 @@ open class GenericProtocolWithTypeConstraintMock: GenericProtocolWithTypeConstra
         public static func decode<T: Decodable>(_ type: Parameter<T.Type>, from data: Parameter<Data>, willProduce: (Stubber<T>) -> Void) -> MethodStub {
             let willReturn: [T] = []
 			let given: Given = { return Given(method: .m_decode__typefrom_data(`type`.wrapAsGeneric(), `data`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
-			let stubber = given.stub(for: (T).self)
+			let stubber = given.stub(for: T.self)
 			willProduce(stubber)
 			return given
         }
         public static func test<FOO>(_ type: Parameter<FOO.Type>, willProduce: (Stubber<Int>) -> Void) -> MethodStub {
             let willReturn: [Int] = []
 			let given: Given = { return Given(method: .m_test__type(`type`.wrapAsGeneric()), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
-			let stubber = given.stub(for: (Int).self)
+			let stubber = given.stub(for: Int.self)
 			willProduce(stubber)
 			return given
         }
@@ -4737,7 +4737,7 @@ open class HistorySectionMapperTypeMock: HistorySectionMapperType, Mock {
         public static func map<T: DateSortable>(_ items: Parameter<[T]>, willProduce: (Stubber<[(key: String, items: [T])]>) -> Void) -> MethodStub {
             let willReturn: [[(key: String, items: [T])]] = []
 			let given: Given = { return Given(method: .m_map__items(`items`.wrapAsGeneric()), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
-			let stubber = given.stub(for: ([(key: String, items: [T])]).self)
+			let stubber = given.stub(for: [(key: String, items: [T])].self)
 			willProduce(stubber)
 			return given
         }
@@ -5525,49 +5525,49 @@ open class ProtocolMethodsGenericThatDifferOnlyInReturnTypeMock: ProtocolMethods
         public static func foo<T>(bar: Parameter<T>, willProduce: (Stubber<String>) -> Void) -> MethodStub {
             let willReturn: [String] = []
 			let given: Given = { return Given(method: .m_foo__bar_bar_1(`bar`.wrapAsGeneric()), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
-			let stubber = given.stub(for: (String).self)
+			let stubber = given.stub(for: String.self)
 			willProduce(stubber)
 			return given
         }
         public static func foo<T>(bar: Parameter<T>, willProduce: (Stubber<Int>) -> Void) -> MethodStub {
             let willReturn: [Int] = []
 			let given: Given = { return Given(method: .m_foo__bar_bar_2(`bar`.wrapAsGeneric()), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
-			let stubber = given.stub(for: (Int).self)
+			let stubber = given.stub(for: Int.self)
 			willProduce(stubber)
 			return given
         }
         public static func foo<T>(bar: Parameter<T>, willProduce: (Stubber<Float>) -> Void) -> MethodStub where T: A {
             let willReturn: [Float] = []
 			let given: Given = { return Given(method: .m_foo__bar_bar_4(`bar`.wrapAsGeneric()), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
-			let stubber = given.stub(for: (Float).self)
+			let stubber = given.stub(for: Float.self)
 			willProduce(stubber)
 			return given
         }
         public static func foo<T>(bar: Parameter<T>, willProduce: (Stubber<Double>) -> Void) -> MethodStub where T: B {
             let willReturn: [Double] = []
 			let given: Given = { return Given(method: .m_foo__bar_bar_5(`bar`.wrapAsGeneric()), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
-			let stubber = given.stub(for: (Double).self)
+			let stubber = given.stub(for: Double.self)
 			willProduce(stubber)
 			return given
         }
         public static func foo<T>(bar: Parameter<String>, willProduce: (Stubber<Array<T>>) -> Void) -> MethodStub {
             let willReturn: [Array<T>] = []
 			let given: Given = { return Given(method: .m_foo__bar_bar_6(`bar`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
-			let stubber = given.stub(for: (Array<T>).self)
+			let stubber = given.stub(for: Array<T>.self)
 			willProduce(stubber)
 			return given
         }
         public static func foo<T>(bar: Parameter<String>, willProduce: (Stubber<Set<T>>) -> Void) -> MethodStub {
             let willReturn: [Set<T>] = []
 			let given: Given = { return Given(method: .m_foo__bar_bar_7(`bar`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
-			let stubber = given.stub(for: (Set<T>).self)
+			let stubber = given.stub(for: Set<T>.self)
 			willProduce(stubber)
 			return given
         }
         public static func foo<T>(bar: Parameter<Bool>, willProduce: (Stubber<T>) -> Void) -> MethodStub where T: A {
             let willReturn: [T] = []
 			let given: Given = { return Given(method: .m_foo__bar_bar_9(`bar`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
-			let stubber = given.stub(for: (T).self)
+			let stubber = given.stub(for: T.self)
 			willProduce(stubber)
 			return given
         }
@@ -7799,7 +7799,7 @@ open class ProtocolWithGenericConstraintsMock<ContainedType>: ProtocolWithGeneri
         public static func extractString<U: CustomStringConvertible>(willProduce: (Stubber<String?>) -> Void) -> MethodStub where ContainedType == Optional<U> {
             let willReturn: [String?] = []
 			let given: Given = { return Given(method: .m_extractString, products: willReturn.map({ StubProduct.return($0 as Any) })) }()
-			let stubber = given.stub(for: (String?).self)
+			let stubber = given.stub(for: String?.self)
 			willProduce(stubber)
 			return given
         }
@@ -8019,14 +8019,14 @@ open class ProtocolWithGenericMethodsMock: ProtocolWithGenericMethods, Mock {
         public static func methodWithGeneric<T>(lhs: Parameter<T>, rhs: Parameter<T>, willProduce: (Stubber<Bool>) -> Void) -> MethodStub {
             let willReturn: [Bool] = []
 			let given: Given = { return Given(method: .m_methodWithGeneric__lhs_lhsrhs_rhs(`lhs`.wrapAsGeneric(), `rhs`.wrapAsGeneric()), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
-			let stubber = given.stub(for: (Bool).self)
+			let stubber = given.stub(for: Bool.self)
 			willProduce(stubber)
 			return given
         }
         public static func methodWithGenericConstraint<U>(param: Parameter<[U]>, willProduce: (Stubber<U>) -> Void) -> MethodStub where U: Equatable {
             let willReturn: [U] = []
 			let given: Given = { return Given(method: .m_methodWithGenericConstraint__param_param(`param`.wrapAsGeneric()), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
-			let stubber = given.stub(for: (U).self)
+			let stubber = given.stub(for: U.self)
 			willProduce(stubber)
 			return given
         }
@@ -8222,7 +8222,7 @@ open class ProtocolWithGenericMethodsNestedMock: ProtocolWithGenericMethodsNeste
         public static func methodWithGeneric<T>(resource: Parameter<Resource<T>>, willProduce: (Stubber<Observable<Response<T>>>) -> Void) -> MethodStub {
             let willReturn: [Observable<Response<T>>] = []
 			let given: Given = { return Given(method: .m_methodWithGeneric__resource_resource(`resource`.wrapAsGeneric()), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
-			let stubber = given.stub(for: (Observable<Response<T>>).self)
+			let stubber = given.stub(for: Observable<Response<T>>.self)
 			willProduce(stubber)
 			return given
         }
@@ -8786,7 +8786,7 @@ open class ProtocolWithMethodsWithGenericReturnTypeThatThrowsMock: ProtocolWithM
         public static func max<Type: Comparable>(for attribute: Parameter<Int>, over samples: Parameter<[Int]>, per aggregationUnit: Parameter<String?>, willProduce: (StubberThrows<[(date: String?, value: Type)]>) -> Void) -> MethodStub {
             let willThrow: [Error] = []
 			let given: Given = { return Given(method: .m_max__for_attributeover_samplesper_aggregationUnit(`attribute`, `samples`, `aggregationUnit`), products: willThrow.map({ StubProduct.throw($0) })) }()
-			let stubber = given.stubThrows(for: ([(date: String?, value: Type)]).self)
+			let stubber = given.stubThrows(for: [(date: String?, value: Type)].self)
 			willProduce(stubber)
 			return given
         }
@@ -11862,7 +11862,7 @@ public final class SelfConstrainedProtocolMock: SelfConstrainedProtocol, Mock, S
         public static func genericMethodWithNestedSelf<T>(param: Parameter<Int>, second: Parameter<T>, other: Parameter<(SelfConstrainedProtocolMock,SelfConstrainedProtocolMock)>, willProduce: (Stubber<SelfConstrainedProtocolMock>) -> Void) -> MethodStub {
             let willReturn: [SelfConstrainedProtocolMock] = []
 			let given: Given = { return Given(method: .m_genericMethodWithNestedSelf__param_paramsecond_secondother_other(`param`, `second`.wrapAsGeneric(), `other`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
-			let stubber = given.stub(for: (SelfConstrainedProtocolMock).self)
+			let stubber = given.stub(for: SelfConstrainedProtocolMock.self)
 			willProduce(stubber)
 			return given
         }
